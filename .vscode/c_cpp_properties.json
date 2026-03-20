@@ -1,0 +1,44 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/junyi/dev_ws/install/my_robot_interfaces/include/**",
+        "/home/junyi/bumperbot_ws/install/bumperbot_planning/include/**",
+        "/home/junyi/bumperbot_ws/install/bumperbot_motion/include/**",
+        "/home/junyi/bumperbot_ws/install/bumperbot_firmware/include/**",
+        "/home/junyi/bumperbot_ws/install/bumperbot_controller/include/**",
+        "/home/junyi/eque7_ws/install/ros2_mpu6050/include/**",
+        "/home/junyi/eque7_ws/install/eque7_firmware/include/**",
+        "/home/junyi/eque7_ws/install/eque7_controller/include/**",
+        "/home/junyi/assignment_ws/install/turtlesim/include/**",
+        "/home/junyi/assignment_ws/install/amr_controller/include/**",
+        "/home/junyi/drone_ws/install/realsense2_camera/include/**",
+        "/home/junyi/drone_ws/install/realsense2_camera_msgs/include/**",
+        "/home/junyi/ws/install/ros_ign_interfaces/include/**",
+        "/home/junyi/ws/install/ros_gz_sim/include/**",
+        "/home/junyi/ws/install/ros_gz_interfaces/include/**",
+        "/home/junyi/arduinobot_ws/install/arduinobot_msgs/include/**",
+        "/home/junyi/turtlebot3_ws/install/turtlebot3_gazebo/include/**",
+        "/home/junyi/turtlebot3_ws/install/turtlebot3_fake_node/include/**",
+        "/opt/ros/humble/include/**",
+        "/home/junyi/eque7_ws/src/eque7_robot/eque7_bringup/include/**",
+        "/home/junyi/eque7_ws/src/eque7_robot/eque7_controller/include/**",
+        "/home/junyi/eque7_ws/src/eque7_robot/eque7_description/include/**",
+        "/home/junyi/eque7_ws/src/eque7_robot/eque7_firmware/include/**",
+        "/home/junyi/eque7_ws/src/eque7_robot/eque7_localization/include/**",
+        "/home/junyi/eque7_ws/src/ros2_mpu6050/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

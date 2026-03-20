@@ -1,0 +1,9 @@
+<library path="eque7_firmware">
+  <class name="eque7_firmware/Eque7Interface"
+    type="eque7_firmware::Eque7Interface"
+    base_class_type="hardware_interface::SystemInterface">
+    <description>
+      Eque7 Hardware Interface
+    </description>
+  </class>
+</library>
