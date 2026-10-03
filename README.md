@@ -2,10 +2,10 @@
 
 # A Comparative Study: LiDAR, Visual & LiDAR-Visual Fusion SLAM for Low Cost Indoor Mobile Robot
 
-![Status](https://img.shields.io/badge/Status-Work_in_Progress-orange)
+![Status](https://img.shields.io/badge/Status-Results_Available-brightgreen)
 
 
-> **Note:** This repository contains the ongoing work for my Final Year Project (FYP). It serves as a practical evaluation of different SLAM modalities on a low-cost robotic platform.
+> **Note:** This repository contains my Final Year Project (FYP). It serves as a practical evaluation of different SLAM modalities on a low-cost robotic platform. The full write-up is available as a [Technical Paper (PDF)](docs/paper/G7S2_LIM_JUN_YI_231061481_TechnicalPaper.pdf).
 
 ## Overview
 As mobile robots increasingly navigate GNSS-denied indoor environments, selecting the optimal Simultaneous Localization and Mapping (SLAM) algorithm is critical. This project evaluates and compares LiDAR-based SLAM, RGB-D Visual SLAM, and LiDAR-Visual Fusion SLAM operating on a custom differential drive robot. 
@@ -53,6 +53,72 @@ Since standard indoor environments lack access to GNSS or precise motion capture
 * **Evaluation:** The known, measured coordinates are matched with these timestamps to form a sparse ground truth trajectory. Localization accuracy is then evaluated by calculating the Absolute Trajectory Error (ATE) between the SLAM-estimated poses and the measured waypoints.
 
 
+## Results
+
+Full data collection was completed in two real-world environments (a corridor and a bedroom) and their matching Gazebo simulation counterparts. The same recorded sensor data was replayed offline through all three SLAM approaches to keep the comparison fair.
+
+### Map Quality
+
+**Real-world**
+
+| Environment | LiDAR-Based SLAM | Visual SLAM | LiDAR-Visual Fusion SLAM |
+|---|---|---|---|
+| Corridor | Excellent | Poor | Good |
+| Bedroom | Excellent | Moderate | Good |
+
+**Simulation**
+
+| Environment | LiDAR-Based SLAM | Visual SLAM | LiDAR-Visual Fusion SLAM |
+|---|---|---|---|
+| Corridor | Excellent | Poor | Good |
+| Bedroom | Excellent | Moderate | Excellent |
+
+### Localization Accuracy (ATE RMSE)
+
+**Real-world**
+
+| Environment | LiDAR-Based SLAM | Visual SLAM | LiDAR-Visual Fusion SLAM |
+|---|---|---|---|
+| Corridor | 6.311 cm | 18.414 cm | 17.986 cm |
+| Bedroom | 4.250 cm | 13.503 cm | 13.501 cm |
+
+**Simulation**
+
+| Environment | LiDAR-Based SLAM | Visual SLAM | LiDAR-Visual Fusion SLAM |
+|---|---|---|---|
+| Corridor | 2.085 cm | 1.354 cm | 1.353 cm |
+| Bedroom | 1.192 cm | 1.224 cm | 1.209 cm |
+
+### Generated Maps
+
+**Real-world corridor** — (a) LiDAR SLAM, (b) Visual SLAM, (c) Fusion SLAM
+![Real-world corridor maps](docs/results/real_corridor_maps.png)
+
+**Real-world bedroom** — (a) LiDAR SLAM, (b) Visual SLAM, (c) Fusion SLAM
+![Real-world bedroom maps](docs/results/real_bedroom_maps.png)
+
+**Simulated corridor** — (a) LiDAR SLAM, (b) Visual SLAM, (c) Fusion SLAM
+![Simulated corridor maps](docs/results/sim_corridor_maps.png)
+
+**Simulated bedroom** — (a) LiDAR SLAM, (b) Visual SLAM, (c) Fusion SLAM
+![Simulated bedroom maps](docs/results/sim_bedroom_maps.png)
+
+### Trajectory Comparison
+
+**Real-world** — (a) Corridor, (b) Bedroom
+![Real-world trajectory comparison](docs/results/real_trajectory_comparison.png)
+
+**Simulation** — (a) Corridor, (b) Bedroom
+![Simulation trajectory comparison](docs/results/sim_trajectory_comparison.png)
+
+### Key Takeaways
+- **LiDAR-based SLAM** was the most reliable approach in the real world, producing the most geometrically consistent maps and the lowest localization error in both environments.
+- **Visual SLAM** struggled in the feature-sparse corridor (largest drift and map distortion) but performed much better in the furnished bedroom, and matched the other approaches once run in simulation — confirming the real-world gap comes from sensing conditions (motion blur, lighting, limited texture), not the algorithm itself.
+- **LiDAR-visual fusion SLAM** improved map consistency over Visual SLAM alone but did not beat LiDAR-only localization accuracy, likely due to calibration/synchronization overhead on consumer-grade hardware outweighing the added visual information.
+- Across the board, **simulation results were substantially more optimistic** than real-world results, underlining that simulation-only evaluation can overstate practical SLAM performance.
+
+Full methodology, discussion, and references are in the [Technical Paper (PDF)](docs/paper/G7S2_LIM_JUN_YI_231061481_TechnicalPaper.pdf).
+
 ## Current Progress
 - ✅ Initial system modeling and algorithm testing in Gazebo simulation.
 - ✅ Hardware integration, motor PID tuning, and IMU/Encoder sensor fusion.
@@ -60,6 +126,7 @@ Since standard indoor environments lack access to GNSS or precise motion capture
 - ✅ **Pipeline Validation (Small Test Room):** Successfully collected `rosbag` data (`/tf`, `/odom`, `/scan`, `/camera/...`) to verify hardware reliability.
 - ✅ **Pipeline Validation (Small Test Room):** Successfully verified the offline SLAM execution (SLAM Toolbox, RTAB-Map) and `evo` toolkit evaluation workflow on the test data.
 - ✅ TF-to-TUM data conversion pipeline fully established.
-- ⏳ **Pending:** Full data collection using the sparse ground truth method in the final experimental environment.
-- ⏳ **Pending:** Final benchmarking data compilation, visual map inspection, and computational load analysis.
+- ✅ Full data collection using the sparse ground truth method in the real-world and simulation environments (corridor + bedroom).
+- ✅ Final benchmarking: ATE evaluation and qualitative map comparison across all three SLAM approaches.
+- ⏳ **Pending:** Evaluation in larger/dynamic environments and higher-precision ground truth (future work).
 
